@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "idea-launch",
+  "version": "1.0.0",
+  "description": "Validate a product idea with real ad traffic without leaving your editor. Connects the Idea Launch MCP server and adds the judgement needed to set a test up well and read the result honestly.",
+  "author": {
+    "name": "Idea Launch",
+    "url": "https://www.idea-launch.io"
+  },
+  "homepage": "https://www.idea-launch.io/mcp",
+  "repository": "https://github.com/apsquared/idea-launch-plugin",
+  "license": "Proprietary",
+  "keywords": [
+    "idea-validation",
+    "market-research",
+    "product-validation",
+    "ads",
+    "startup"
+  ]
+}
