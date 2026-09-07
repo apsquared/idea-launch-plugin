@@ -1,7 +1,7 @@
 ---
 name: reading-a-market-read
 description: Interpret an Idea Launch market read correctly — the validation score, band, confidence, and recommended next move — and report it without overstating what a single ad test proves. Use when the user asks how their Idea Launch test went, what a validation score or band means, whether a result is good, whether to build or keep testing, or why a run is not live yet.
-license: Proprietary. See https://www.idea-launch.io/tos
+license: MIT
 metadata:
   author: idea-launch
   version: "1.0"

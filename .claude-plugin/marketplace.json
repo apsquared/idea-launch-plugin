@@ -17,7 +17,7 @@
         "url": "https://www.idea-launch.io"
       },
       "homepage": "https://www.idea-launch.io/mcp",
-      "license": "Proprietary",
+      "license": "MIT",
       "keywords": [
         "idea-validation",
         "market-research",

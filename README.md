@@ -16,6 +16,7 @@ agent-plugin/
 │   ├── plugin.json                      # Claude Code manifest
 │   └── marketplace.json                 # Claude Code marketplace entry (source ./)
 ├── .mcp.json                            # Claude Code MCP server (http)
+├── LICENSE                              # MIT
 └── skills/
     ├── reading-a-market-read/SKILL.md   # how to interpret a result honestly
     └── setting-up-an-idea-test/SKILL.md # how to get a test worth paying for
@@ -73,6 +74,12 @@ not a broken install. The skills load either way; the tools need the sign-in.
 None to configure. Neither `mcp.json` nor `.mcp.json` carries credentials by
 design. The first call opens a browser sign-in over OAuth 2.1 with dynamic
 client registration.
+
+## License
+
+MIT — see [LICENSE](./LICENSE). The package is manifests and skill documents;
+the Idea Launch service itself is governed by its
+[terms of service](https://www.idea-launch.io/tos).
 
 ## Conformance
 

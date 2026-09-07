@@ -1,7 +1,7 @@
 ---
 name: setting-up-an-idea-test
 description: Set up an Idea Launch test well — write a brief specific enough to target against, generate ad creative, and check every gate before the user spends an Ad Run. Use when the user wants to validate a product idea, test whether something is worth building, get ads running for a product they already shipped, or asks what is blocking their Idea Launch test from starting.
-license: Proprietary. See https://www.idea-launch.io/tos
+license: MIT
 metadata:
   author: idea-launch
   version: "1.0"
