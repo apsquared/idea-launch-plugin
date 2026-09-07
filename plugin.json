@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "idea-launch",
+  "version": "1.0.0",
+  "description": "Validate a product idea with real ad traffic without leaving your editor. Connects the Idea Launch MCP server and adds the judgement needed to set a test up well and read the result honestly.",
+  "author": {
+    "name": "Idea Launch",
+    "url": "https://www.idea-launch.io"
+  },
+  "homepage": "https://www.idea-launch.io/mcp",
+  "keywords": [
+    "idea-validation",
+    "market-research",
+    "product-validation",
+    "ads",
+    "startup"
+  ]
+}

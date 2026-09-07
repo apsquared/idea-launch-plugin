@@ -1,0 +1,9 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "idea-launch": {
+      "type": "streamable-http",
+      "url": "https://www.idea-launch.io/api/mcp"
+    }
+  }
+}
