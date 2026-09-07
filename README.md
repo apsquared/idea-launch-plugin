@@ -44,6 +44,9 @@ opens a browser sign-in over OAuth 2.1 with dynamic client registration.
 
 ## Conformance
 
-`tests/agent-plugin.smoke.test.ts` in the main repository encodes the normative
-constraints from the Agent Plugins and Agent Skills specifications, so the
-package cannot drift out of conformance without a test failing.
+This package targets Agent Plugins v1.0.0 and the Agent Skills specification.
+Conformance is enforced by an automated check on every change: the manifest's
+closed field set and name rules, the `streamable-http` server shape, and each
+skill's frontmatter — including that a skill's `name` matches its directory.
+The check also asserts that `mcp.json` carries no credential-shaped values,
+since this package is distributed publicly.

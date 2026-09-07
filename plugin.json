@@ -8,6 +8,8 @@
     "url": "https://www.idea-launch.io"
   },
   "homepage": "https://www.idea-launch.io/mcp",
+  "repository": "https://github.com/apsquared/idea-launch-plugin",
+  "license": "Proprietary",
   "keywords": [
     "idea-validation",
     "market-research",
