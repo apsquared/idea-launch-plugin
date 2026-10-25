@@ -69,6 +69,26 @@ Pick `idea-launch` and authenticate. Until you do, the server answers `401` and
 Claude Code reports it as failed to connect — that is the unauthenticated state,
 not a broken install. The skills load either way; the tools need the sign-in.
 
+## Installing — Cursor
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=idea-launch&config=eyJ1cmwiOiJodHRwczovL3d3dy5pZGVhLWxhdW5jaC5pby9hcGkvbWNwIn0%3D)
+
+The button connects the MCP server only. Cursor also supports the Agent
+Plugins format, which adds the skills too — see
+<https://cursor.com/docs/plugins>.
+
+## Installing — skills only, any agent
+
+For an agent that reads `SKILL.md` files but not this plugin format, install
+the two skills with the [skills.sh](https://skills.sh) CLI:
+
+```
+npx skills add apsquared/idea-launch-plugin
+```
+
+That installs the skills, not the server. Connect the MCP server as well
+(<https://www.idea-launch.io/mcp>), since the skills call its tools.
+
 ## Auth
 
 None to configure. Neither `mcp.json` nor `.mcp.json` carries credentials by
