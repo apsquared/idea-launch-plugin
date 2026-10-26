@@ -1,5 +1,27 @@
 # Idea Launch — Agent Plugin
 
+[Idea Launch](https://www.idea-launch.io) runs a small, managed ad test for a
+SaaS or app idea, or for a product you already shipped, and returns a market
+read: click-through rate, signups, a validation score and a recommended next
+move. This plugin lets Claude Code, Cursor, Codex and other coding agents set up
+that test and read the result without leaving the editor. It connects the Idea
+Launch MCP server (browser sign-in, no API key) and adds two skills: one for
+writing a brief worth testing, one for reading the result honestly. No agent can
+spend money; you start each paid test in the web app.
+
+In Claude Code:
+
+```
+/plugin marketplace add apsquared/idea-launch-plugin
+/plugin install idea-launch@apsquared
+```
+
+The two skills only, for any agent that reads `SKILL.md` (connect the server as
+well): `npx skills add apsquared/idea-launch-plugin`. Every other client, and
+the MCP server on its own: <https://www.idea-launch.io/mcp>.
+
+## The package
+
 A portable [Agent Plugins](https://agent-plugins.org) v1.0.0 package that
 connects the Idea Launch MCP server and adds the judgement needed to use it
 well.
