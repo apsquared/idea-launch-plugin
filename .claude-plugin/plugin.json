@@ -1,8 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "idea-launch",
-  "version": "1.0.0",
-  "description": "Validate a product idea with real ad traffic without leaving your editor. Connects the Idea Launch MCP server and adds the judgement needed to set a test up well and read the result honestly.",
+  "displayName": "Idea Launch",
+  "version": "1.1.0",
+  "description": "Prepare a demand test for a SaaS or app idea from your coding agent, then read the result in the conversation. Connects the Idea Launch MCP server and adds skills for setting a test up well and reading the result honestly. You start each paid test yourself in the Idea Launch app.",
   "author": {
     "name": "Idea Launch",
     "url": "https://www.idea-launch.io"
@@ -10,11 +11,13 @@
   "homepage": "https://www.idea-launch.io/mcp",
   "repository": "https://github.com/apsquared/idea-launch-plugin",
   "license": "MIT",
+  "privacyPolicyUrl": "https://www.idea-launch.io/privacy-policy",
+  "icon": "./assets/icon.png",
   "keywords": [
     "idea-validation",
+    "demand-test",
     "market-research",
     "product-validation",
-    "ads",
     "startup"
   ]
 }

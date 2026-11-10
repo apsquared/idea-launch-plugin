@@ -2,7 +2,7 @@
   "mcpServers": {
     "idea-launch": {
       "type": "http",
-      "url": "https://www.idea-launch.io/api/mcp"
+      "url": "https://www.idea-launch.io/api/mcp/claude"
     }
   }
 }

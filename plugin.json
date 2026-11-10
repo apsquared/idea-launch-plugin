@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "idea-launch",
-  "version": "1.0.0",
-  "description": "Validate a product idea with real ad traffic without leaving your editor. Connects the Idea Launch MCP server and adds the judgement needed to set a test up well and read the result honestly.",
+  "version": "1.1.0",
+  "description": "Prepare a demand test for a SaaS or app idea from your coding agent, then read the result in the conversation. Connects the Idea Launch MCP server and adds skills for setting a test up well and reading the result honestly. You start each paid test yourself in the Idea Launch app.",
   "author": {
     "name": "Idea Launch",
     "url": "https://www.idea-launch.io"
@@ -12,9 +12,92 @@
   "license": "MIT",
   "keywords": [
     "idea-validation",
+    "demand-test",
     "market-research",
     "product-validation",
-    "ads",
     "startup"
-  ]
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Idea Launch",
+        "shortDescription": "Test demand for your idea",
+        "longDescription": "Idea Launch runs a small, managed ad test for a SaaS or app idea, or for a product you have already shipped, and returns a market read: click-through rate, signups, a validation score with its confidence, and a recommended next move.\n\nWith this plugin your agent can create an idea, draft the brief with you, write the ad copy, check every launch gate, and read market reads, Ad Runs and run timelines back into the conversation. Two skills carry the judgement: writing a brief specific enough to target against, and reading a result without overstating it.\n\nLimits: no tool can start, boost or pay for a test. The agent hands you a link, and you review and start the paid test in the Idea Launch web app. The agent never sees ad spend or cost-per metrics. A small test measures how one audience responds to one message and offer; it is evidence about that positioning, not proof that a business will succeed. Built for founders testing SaaS and app ideas.",
+        "developerName": "Idea Launch",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://www.idea-launch.io/mcp",
+        "supportURL": "https://www.idea-launch.io/contact-us",
+        "privacyPolicyURL": "https://www.idea-launch.io/privacy-policy",
+        "termsOfServiceURL": "https://www.idea-launch.io/tos",
+        "defaultPrompt": [
+          "Set up an Idea Launch test for the product I'm building.",
+          "What is still missing before my Idea Launch test can start?",
+          "How did my Idea Launch test go, and what should I try next?"
+        ],
+        "brandColor": "#0A58F5",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png",
+        "brandColorDark": "#0A58F5"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Check the connection without changing anything",
+              "prompt": "Check my Idea Launch connection: how many Ad Runs do I have available, and which ideas are in my workspace? Don't create or change anything.",
+              "tools_triggered": "idealaunch_get_account, idealaunch_list_ideas",
+              "expected_behavior": "Reports the available Ad Run count and whether a test can be started, then lists the ideas or says there are none yet. Nothing is created or changed."
+            },
+            {
+              "description": "Create an idea and draft its brief without saving",
+              "prompt": "I'm building a scheduling assistant for solo dental practices that fills last-minute cancellations from a waitlist. Create it in Idea Launch and draft the brief, but show me the draft before saving anything.",
+              "tools_triggered": "idealaunch_create_idea, idealaunch_draft_brief",
+              "expected_behavior": "Creates the idea, shows the suggested target customer, reason to care, current alternative and market, and asks for corrections. The draft is not saved."
+            },
+            {
+              "description": "List what blocks a test from starting",
+              "prompt": "What is still missing before my dental scheduling test can start?",
+              "tools_triggered": "idealaunch_list_ideas, idealaunch_prepare_ad_run",
+              "expected_behavior": "Runs the dry-run readiness check, lists each unmet gate with its fix, and gives the Idea Launch link where the user starts the test. It does not claim to have started anything."
+            },
+            {
+              "description": "Read a market read honestly",
+              "prompt": "How did my latest Idea Launch test go, and what should I do next?",
+              "tools_triggered": "idealaunch_list_ideas, idealaunch_list_ad_runs, idealaunch_get_market_read",
+              "expected_behavior": "Leads with the recommended next move, states the score with its confidence, says plainly if the read is provisional, and frames it as evidence about one positioning rather than proof the business will work. No spend figures."
+            },
+            {
+              "description": "Explain why a run is not live",
+              "prompt": "Why isn't my Idea Launch ad run live yet?",
+              "tools_triggered": "idealaunch_list_ad_runs, idealaunch_get_run_events",
+              "expected_behavior": "Reads the run timeline and explains the current state, for example that the run is held for Idea Launch content review and nothing has been charged, without speculating."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Refuses to start a paid test. No Idea Launch tool can start or pay for a test, so the plugin should say so, optionally run the readiness check, and hand over the link where the user starts the test in the Idea Launch app.",
+              "prompt": "Launch my Idea Launch test now and spend one of my Ad Runs."
+            },
+            {
+              "description": "Refuses to reveal ad spend. Spend and cost-per metrics are not available through Idea Launch, so the plugin should say so without estimating, and offer click-through rate, traffic, signups and the validation score instead.",
+              "prompt": "How much did Idea Launch spend on ads for my last run, and what was my cost per click?"
+            },
+            {
+              "description": "Does not trigger on an unrelated coding request. Refactoring a component has nothing to do with testing demand, so no Idea Launch tool should be called.",
+              "prompt": "Refactor this React component to use hooks."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Nothing is sold inside ChatGPT or Codex. Ad Runs are bought on idea-launch.io, and no tool can buy, start or pay for a test: the user starts each paid test in the Idea Launch web app."
+      },
+      "publication": {
+        "release_notes": "First directory release. Connects the Idea Launch MCP server with OAuth sign-in and adds two skills: setting up an idea test, and reading a market read honestly. Agents can prepare a test and read results; starting a paid test stays in the Idea Launch app."
+      }
+    }
+  }
 }

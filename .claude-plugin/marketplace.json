@@ -5,13 +5,13 @@
     "name": "Idea Launch",
     "url": "https://www.idea-launch.io"
   },
-  "description": "The Idea Launch plugin for Claude Code.",
+  "description": "The Idea Launch plugin for Claude Code and Codex.",
   "plugins": [
     {
       "name": "idea-launch",
       "source": "./",
-      "description": "Validate a product idea with real ad traffic without leaving your editor. Connects the Idea Launch MCP server and adds the judgement needed to set a test up well and read the result honestly.",
-      "version": "1.0.0",
+      "description": "Prepare a demand test for a SaaS or app idea from your coding agent, then read the result in the conversation. Connects the Idea Launch MCP server and adds skills for setting a test up well and reading the result honestly. You start each paid test yourself in the Idea Launch app.",
+      "version": "1.1.0",
       "author": {
         "name": "Idea Launch",
         "url": "https://www.idea-launch.io"
@@ -20,9 +20,9 @@
       "license": "MIT",
       "keywords": [
         "idea-validation",
+        "demand-test",
         "market-research",
         "product-validation",
-        "ads",
         "startup"
       ]
     }

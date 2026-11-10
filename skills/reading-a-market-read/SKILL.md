@@ -4,16 +4,21 @@ description: Interpret an Idea Launch market read correctly — the validation s
 license: MIT
 metadata:
   author: idea-launch
-  version: "1.0"
+  version: "1.1"
 ---
 
 # Reading an Idea Launch market read
 
-An Ad Run measures whether strangers respond to **a specific positioning** — the
-message, the offer, and the landing experience together. It does not measure
-whether the business will work. Every reading below inherits that limit.
+An Ad Run measures whether strangers respond to **a specific positioning** — one
+audience, one message, one offer, and the landing experience together. It does
+not measure whether the business will work, and a small test can be
+inconclusive. Every reading below inherits that limit.
 
-Fetch the readout with `idealaunch_get_market_read`. Do not compute your own
+Find the run with `idealaunch_list_ideas` and `idealaunch_list_ad_runs`, then
+fetch the readout with `idealaunch_get_market_read`. Pass
+`response_format: "json"` when you need the structured fields below: the
+default markdown shows the score and the written `recommendation`, but not
+`recommendedEvidenceAction` or the lineage readout. Do not compute your own
 score from the metrics; the score is benchmarked against other runs and you
 cannot reproduce that locally.
 
@@ -21,6 +26,8 @@ cannot reproduce that locally.
 
 The score alone is not the finding. A score with low confidence is a shrug, not
 a verdict.
+
+`validationScore` and `validationBand`:
 
 | Score | Band | What it supports |
 |---|---|---|
@@ -30,15 +37,16 @@ a verdict.
 | 20–39 | `weak` | Little pull for this positioning. Rethink the angle, not the product. |
 | < 20 | `little_evidence` | Not enough happened to conclude anything. |
 
-Confidence gates all of it:
+Confidence gates all of it. The field is `confidenceScore`, a number; the
+labels below are how to describe it (the app uses the same cut-offs):
 
-| Confidence | Meaning |
-|---|---|
-| 70+ | `high` — the band can carry a decision |
-| 40–69 | `medium` — directional; prefer more evidence before committing |
-| < 40 | `low` — report the band as a hint, not a result |
+| `confidenceScore` | Say | Meaning |
+|---|---|---|
+| 70+ | high | The band can carry a decision |
+| 40–69 | medium | Directional; prefer more evidence before committing |
+| < 40 | low | Report the band as a hint, not a result |
 
-`isProvisional` is true whenever confidence is below 70. **When it is true, say
+`isProvisional` is true whenever `confidenceScore` is below 70. **When it is true, say
 so in your first sentence.** A provisional 72 is not "promising, go build" — it
 is "leaning positive, not settled".
 
@@ -54,9 +62,21 @@ is "leaning positive, not settled".
   If the user wants a demand read, the fix is to set up signup tracking, not to
   run the test again.
 
+A test that sends traffic to the user's own site is read as
+`conversion_backed` unless they told Idea Launch their form will not report
+signups. If their form was never connected, zero signups means "not measured".
+Check before reporting it as no demand, and point them to the signup tracking
+setup in the app.
+
 ## Lead with the move, not the numbers
 
 `recommendedEvidenceAction` is the product's own recommendation. Lead with it.
+A single run (`get_market_read`) uses `boost_run`, `start_angle_variation`,
+`wait_for_more_data` or `none`. The idea-level and lineage readouts
+(`list_ideas`, `lineage.overallReadout`) use `boost_best_run`,
+`start_angle_variation`, `wait_for_active_runs` or `none`, plus a
+`recommendedRunId`. `start_market_variation` exists in the schema but is not
+currently produced.
 
 | Action | Say |
 |---|---|
@@ -72,8 +92,10 @@ that moved it rather than listing all of them.
 ## A run that is not live yet
 
 If a run has no readout, check `idealaunch_get_run_events` before speculating.
-A run held at `pending_review` is waiting on an Idea Launch content review —
-nothing has been charged and nothing has reached the ad platform. Say that
+A run with status `pending_review` is waiting on an Idea Launch content
+review — nothing has been charged and nothing has reached the ad platform. (A
+separate `providerReviewState` of `pending_review` means the ad platform's own
+review, after launch.) Say that
 plainly; it is not an error and not something the user needs to fix.
 
 ## Language
@@ -96,7 +118,8 @@ them from anything else defeats the point.
   intent.
 - **Calling a weak band a dead product.** It is evidence about one positioning.
   The usual next step is a different angle, not abandoning the idea.
-- **Averaging runs by hand.** Use the lineage readout from
-  `idealaunch_get_ad_run`; runs are weighted, not averaged.
+- **Averaging runs by hand.** Use `lineage.overallReadout` from
+  `idealaunch_get_ad_run` (with `response_format: "json"`); runs are weighted
+  by confidence, not averaged.
 - **Recommending a launch yourself.** You cannot start a run. Report readiness
   and hand over the link.
